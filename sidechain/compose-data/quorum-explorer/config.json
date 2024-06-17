@@ -1,0 +1,74 @@
+{
+  "algorithm": "raft",
+  "nodes": [
+    {
+      "name": "rpcnode",
+      "client": "goquorum",
+      "rpcUrl": "http://rpcnode:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator0",
+      "client": "goquorum",
+      "rpcUrl": "http://validator0:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator1",
+      "client": "goquorum",
+      "rpcUrl": "http://validator1:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator2",
+      "client": "goquorum",
+      "rpcUrl": "http://validator2:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator3",
+      "client": "goquorum",
+      "rpcUrl": "http://validator3:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator4",
+      "client": "goquorum",
+      "rpcUrl": "http://validator4:8545",
+      "privateTxUrl": ""
+    },{
+      "name": "validator5",
+      "client": "goquorum",
+      "rpcUrl": "http://validator5:8545",
+      "privateTxUrl": ""
+    },{
+      "name": "validator6",
+      "client": "goquorum",
+      "rpcUrl": "http://validator6:8545",
+      "privateTxUrl": ""
+    },{
+      "name": "validator7",
+      "client": "goquorum",
+      "rpcUrl": "http://validator7:8545",
+      "privateTxUrl": ""
+    },{
+      "name": "validator8",
+      "client": "goquorum",
+      "rpcUrl": "http://validator8:8545",
+      "privateTxUrl": ""
+    },{
+      "name": "validator9",
+      "client": "goquorum",
+      "rpcUrl": "http://validator9:8545",
+      "privateTxUrl": ""
+    },
+    {
+      "name": "validator10",
+      "client": "goquorum",
+      "rpcUrl": "http://validator10:8545",
+      "privateTxUrl": ""
+    }
+  
+  ]
+}
+ 

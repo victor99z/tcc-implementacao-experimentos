@@ -1,0 +1,52 @@
+package main
+
+import (
+	"context"
+	"log"
+	"math/big"
+	"os"
+	"time"
+
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/joho/godotenv"
+	"github.com/victor99z/blockchain-app/models"
+)
+
+func main() {
+	godotenv.Load()
+
+	b, _ := os.ReadFile("./wallets/UTC--2024-05-02T02-48-49.339988302Z--823630d906c13965478da03ae24004ad5ff7c691")
+	key, _ := keystore.DecryptKey([]byte(b), "password")
+
+	conn, err := ethclient.Dial("http://localhost:8545")
+	if err != nil {
+		log.Fatalf("Failed to connect to the Ethereum client: %v", err)
+	}
+
+	simpleStorageInstance, _ := models.NewSimpleStorage(
+		common.HexToAddress("0xC3D6867473C88Ca51C24Bd1c000cd84E5eD6C8Cc"), // Smart contract address
+		conn,
+	)
+
+	chainId, _ := conn.NetworkID(context.Background())
+
+	auth, err := bind.NewKeyedTransactorWithChainID(key.PrivateKey, chainId)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	tx, err := simpleStorageInstance.Set(auth, big.NewInt(time.Now().Unix()))
+	if err != nil {
+		log.Fatalf("Failed to send a transaction: %v", err)
+	}
+	log.Printf("Transaction sent: %s", tx.Hash().Hex())
+
+	res, err := simpleStorageInstance.Get(nil)
+	if err != nil {
+		log.Fatalf("Failed to retrieve a stored value: %v", err)
+	}
+	log.Printf("The stored value is: %v", res)
+}

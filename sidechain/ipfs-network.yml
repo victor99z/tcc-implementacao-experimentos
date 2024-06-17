@@ -1,0 +1,143 @@
+version: '3.4'
+
+services:
+  ipfs0:
+    container_name: ipfs0
+    image: ipfs/kubo:release
+    expose:
+    - '5001'
+    - '4001'
+    volumes:
+    - ./compose-data/ipfs/ipfs0:/data/ipfs
+    - ./compose-data/logs/ipfs:/var/log/ipfs/
+    - ./config/swarm.key:/data/ipfs/swarm.key
+    networks:
+      quorum-network: {}
+  cluster0:
+    container_name: cluster0
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+    - ipfs0
+    command: daemon --stats
+    expose:
+    - '9094'
+    - '8888'
+    environment:
+      CLUSTER_PEERNAME: cluster0
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
+      CLUSTER_IPFSHTTP_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_OBSERVATIONS_METRICS_ENABLESTATS: 'true'
+      CLUSTER_OBSERVATIONS_METRICS_PROMETHEUSENDPOINT: /ip4/0.0.0.0/tcp/8888
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_MONITORPINGINTERVAL: 2s
+      IPFS_BOOTSTRAP_RM_ALL: 'true'
+    volumes:
+    - ./compose-data/ipfs/ipfs-cluster0:/data/ipfs-cluster
+    networks:
+      quorum-network: {}
+  ipfs1:
+    container_name: ipfs1
+    image: ipfs/kubo:release
+    expose:
+    - '5001'
+    - '4001'
+    volumes:
+    - ./compose-data/ipfs/ipfs1:/data/ipfs
+    - ./compose-data/logs/ipfs:/var/log/ipfs/
+    - ./config/swarm.key:/data/ipfs/swarm.key
+    networks:
+      quorum-network: {}
+  cluster1:
+    container_name: cluster1
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+    - ipfs1
+    command: daemon --stats
+    expose:
+    - '9094'
+    - '8888'
+    environment:
+      CLUSTER_PEERNAME: cluster1
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs1/tcp/5001
+      CLUSTER_IPFSHTTP_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_OBSERVATIONS_METRICS_ENABLESTATS: 'true'
+      CLUSTER_OBSERVATIONS_METRICS_PROMETHEUSENDPOINT: /ip4/0.0.0.0/tcp/8888
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_MONITORPINGINTERVAL: 2s
+      IPFS_BOOTSTRAP_RM_ALL: 'true'
+    volumes:
+    - ./compose-data/ipfs/ipfs-cluster1:/data/ipfs-cluster
+    networks:
+      quorum-network: {}
+  ipfs2:
+    container_name: ipfs2
+    image: ipfs/kubo:release
+    expose:
+    - '5001'
+    - '4001'
+    volumes:
+    - ./compose-data/ipfs/ipfs2:/data/ipfs
+    - ./compose-data/logs/ipfs:/var/log/ipfs/
+    - ./config/swarm.key:/data/ipfs/swarm.key
+    networks:
+      quorum-network: {}
+  cluster2:
+    container_name: cluster2
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+    - ipfs2
+    command: daemon --stats
+    expose:
+    - '9094'
+    - '8888'
+    environment:
+      CLUSTER_PEERNAME: cluster2
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs2/tcp/5001
+      CLUSTER_IPFSHTTP_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_OBSERVATIONS_METRICS_ENABLESTATS: 'true'
+      CLUSTER_OBSERVATIONS_METRICS_PROMETHEUSENDPOINT: /ip4/0.0.0.0/tcp/8888
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_MONITORPINGINTERVAL: 2s
+      IPFS_BOOTSTRAP_RM_ALL: 'true'
+    volumes:
+    - ./compose-data/ipfs/ipfs-cluster2:/data/ipfs-cluster
+    networks:
+      quorum-network: {}
+  ipfs3:
+    container_name: ipfs3
+    image: ipfs/kubo:release
+    expose:
+    - '5001'
+    - '4001'
+    volumes:
+    - ./compose-data/ipfs/ipfs3:/data/ipfs
+    - ./compose-data/logs/ipfs:/var/log/ipfs/
+    - ./config/swarm.key:/data/ipfs/swarm.key
+    networks:
+      quorum-network: {}
+  cluster3:
+    container_name: cluster3
+    image: ipfs/ipfs-cluster:latest
+    depends_on:
+    - ipfs3
+    command: daemon --stats
+    expose:
+    - '9094'
+    - '8888'
+    environment:
+      CLUSTER_PEERNAME: cluster3
+      CLUSTER_SECRET: ${CLUSTER_SECRET}
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs3/tcp/5001
+      CLUSTER_IPFSHTTP_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
+      CLUSTER_OBSERVATIONS_METRICS_ENABLESTATS: 'true'
+      CLUSTER_OBSERVATIONS_METRICS_PROMETHEUSENDPOINT: /ip4/0.0.0.0/tcp/8888
+      CLUSTER_CRDT_TRUSTEDPEERS: '*'
+      CLUSTER_MONITORPINGINTERVAL: 2s
+      IPFS_BOOTSTRAP_RM_ALL: 'true'
+    volumes:
+    - ./compose-data/ipfs/ipfs-cluster3:/data/ipfs-cluster
+    networks:
+      quorum-network: {}

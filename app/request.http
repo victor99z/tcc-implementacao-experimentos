@@ -1,0 +1,13 @@
+@api_url= http://localhost:5001/api/v1
+@pacient_addr = 2aa850cafdf6c5d5f2d3cacd74cac8592c18024d
+
+### GET ALL records from pacient
+GET {{api_url}}/record/{{pacient_addr}} HTTP/1.1
+
+### GET counter from pacient
+GET {{api_url}}/record/{{pacient_addr}}/counter HTTP/1.1
+
+### Get One Record from pacient
+
+GET {{api_url}}/record/{{pacient_addr}}/1 HTTP/1.1
+

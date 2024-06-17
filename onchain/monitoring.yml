@@ -1,0 +1,54 @@
+
+version: '3.6'
+
+services:
+  prometheus:
+    image: "prom/prometheus:v2.46.0"
+    volumes:
+      - ./compose-data/config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml 
+    ports:
+      - 9090:9090/tcp
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.231
+
+  grafana:
+    image: "grafana/grafana:10.1.0"
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_USERS_VIEWERS_CAN_EDIT=true
+    volumes:
+      - ./compose-data/config/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./compose-data/config/grafana/provisioning/dashboards/jmeter-cnt.json:/var/lib/grafana/dashboards/jmeter-cnt.json
+      - grafana:/var/lib/grafana
+    ports:
+      - 3000:3000/tcp
+    depends_on:
+      - prometheus
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.232
+
+  loki:
+    image: "grafana/loki:2.8.4"
+    volumes:
+      - ./compose-data/loki/loki.yml:/etc/loki/local-config.yaml:ro
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - 3100:3100/tcp
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.233
+
+  promtail:
+    image: "grafana/promtail:2.8.4"
+    volumes:
+      - ./compose-data/logs:/var/log
+      - ./compose-data/promtail/promtail.yml:/etc/promtail/config.yml:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.234

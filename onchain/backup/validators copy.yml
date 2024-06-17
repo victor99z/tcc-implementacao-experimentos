@@ -1,0 +1,106 @@
+version: '3.6'
+
+x-quorum-def:
+  &quorum-def
+  restart: "on-failure"
+  build:
+    context: ./compose-data/config/goquorum
+    args:
+      QUORUM_VERSION: ${QUORUM_VERSION:-latest}
+  expose:
+    - 30303
+    - 8545
+    - 9545
+  deploy:
+    resources:
+      limits:
+          cpus: '0.5'
+          memory: 512M
+
+services:
+
+  validator0:
+    << : *quorum-def
+    ports:
+      - 8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./compose-data/config/nodes/validator0:/config/keys
+      - ./compose-data/logs/quorum:/var/log/quorum/
+      - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.10
+
+  validator1:
+    << : *quorum-def
+    ports:
+      - 8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./compose-data/config/nodes/validator1:/config/keys
+      - ./compose-data/logs/quorum:/var/log/quorum/
+      - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.11
+
+  validator2:
+    << : *quorum-def
+    ports:
+      - 8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./compose-data/config/nodes/validator2:/config/keys
+      - ./compose-data/logs/quorum:/var/log/quorum/
+      - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.12
+
+  validator3:
+    << : *quorum-def
+    ports:
+      - 8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./compose-data/config/nodes/validator3:/config/keys
+      - ./compose-data/logs/quorum:/var/log/quorum/
+      - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.13
+
+  rpcnode:
+    << : *quorum-def
+    ports:
+      - 8545:8545/tcp
+      - 8546:8546/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./compose-data/config/nodes/rpcnode:/config/keys
+      - ./compose-data/logs/quorum:/var/log/quorum/
+      - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.100

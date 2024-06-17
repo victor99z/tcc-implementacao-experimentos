@@ -1,0 +1,6 @@
+compose-data/logs/
+compose-data/logstash/
+compose-data/ipfs
+prometheus/
+grafana/
+tmp

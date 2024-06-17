@@ -1,0 +1,103 @@
+version: '3.6'
+
+services:
+  validator0:
+    container_name: validator0
+    restart: on-failure
+    build:
+      context: ./compose-data/config/goquorum
+      args:
+        QUORUM_VERSION: ${QUORUM_VERSION:-latest}
+    expose:
+    - '8545'
+    - '30303'
+    - '9545'
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    environment:
+    - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+    - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+    - ./compose-data/config/nodes/validator0:/config/keys
+    - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.10
+  validator1:
+    container_name: validator1
+    restart: on-failure
+    build:
+      context: ./compose-data/config/goquorum
+      args:
+        QUORUM_VERSION: ${QUORUM_VERSION:-latest}
+    expose:
+    - '8545'
+    - '30303'
+    - '9545'
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    environment:
+    - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+    - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+    - ./compose-data/config/nodes/validator1:/config/keys
+    - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.11
+  validator2:
+    container_name: validator2
+    restart: on-failure
+    build:
+      context: ./compose-data/config/goquorum
+      args:
+        QUORUM_VERSION: ${QUORUM_VERSION:-latest}
+    expose:
+    - '8545'
+    - '30303'
+    - '9545'
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    environment:
+    - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+    - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+    - ./compose-data/config/nodes/validator2:/config/keys
+    - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.12
+  validator3:
+    container_name: validator3
+    restart: on-failure
+    build:
+      context: ./compose-data/config/goquorum
+      args:
+        QUORUM_VERSION: ${QUORUM_VERSION:-latest}
+    expose:
+    - '8545'
+    - '30303'
+    - '9545'
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    environment:
+    - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+    - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+    - ./compose-data/config/nodes/validator3:/config/keys
+    - ./compose-data/config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.13

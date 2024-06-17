@@ -1,0 +1,70 @@
+{
+  "config": {
+    "chainId": 1337,
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "berlinBlock": 10000000,
+    "londonBlock": 0,
+    "arrowGlacierBlock": 0,
+    "grayGlacierBlock": 0,
+    "qbft": {
+      "epochLength": 30000,
+      "blockPeriodSeconds": 1,
+      "emptyBlockPeriodSeconds": 30 
+    },
+    "transitions": [
+      {
+        "block": 0,
+        "transactionSizeLimit": 128,
+        "contractSizeLimit": 128,
+        "maxCodeSize": 128,
+        "privacyEnhancementsEnabled": false
+      }
+    ],
+    "isQuorum": true
+  },
+  "alloc": {
+    "0xf0e2db6c8dc6c681bb5d6ad121a107f300e9b2b5": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xca843569e3427144cead5e4d5999a3d0ccf92b8e": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x0fbdc686b912d7722dc86510934589e0aaf3b55a": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xc9c913c8c3c1cd416d80a0abf475db2062f161f6": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xed9d02e382b34818e88b88a309c7fe71e65f419d": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xb30f304642de3fee4365ed5cd06ea2e69d3fd0ca": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0x0886328869e4e1f401e1052a5f4aae8b45f42610": {
+      "balance": "1000000000000000000000000000"
+    },
+    "0xf48de4a0c2939e62891f3c6aca68982975477e45": {
+      "balance": "1000000000000000000000000000"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x5f1663fc",
+  "extraData": "0xf87aa00000000000000000000000000000000000000000000000000000000000000000f8549493917cadbace5dfce132b991732c6cda9bcc5b8a9427a97c9aaf04f18f3014c32e036dd0ac76da5f1894ce412f988377e31f4d0ff12d74df73b51c42d0ca9498c1334496614aed49d2e81526d089f7264fed9cc080c0",
+  "gasLimit": "0xf7b760",
+  "difficulty": "0x1",
+  "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
